@@ -69,17 +69,20 @@
       (ranks-present-by-exact-amount? hand 4)))
 
 (defn straight? [hand]
-  (let [all-straight-combos
-        #{#{14 2 3 4 5}
-          #{2 3 4 5 6}
-          #{3 4 5 6 7}
-          #{4 5 6 7 8}
-          #{5 6 7 8 9}
-          #{6 7 8 9 10}
-          #{7 8 9 10 11}
-          #{8 9 10 11 12}
-          #{9 10 11 12 13}
-          #{10 11 12 13 14}}]
+  (let [all-straight-combos (->> (partition 5 1 (cons 14 (range 2 15)))
+                                 (map set)
+                                 set)
+        _ (comment "Same as above: here written out may actually be better"
+                   #{#{14 2 3 4 5}
+                     #{2 3 4 5 6}
+                     #{3 4 5 6 7}
+                     #{4 5 6 7 8}
+                     #{5 6 7 8 9}
+                     #{6 7 8 9 10}
+                     #{7 8 9 10 11}
+                     #{8 9 10 11 12}
+                     #{9 10 11 12 13}
+                     #{10 11 12 13 14}})]
     (->> hand
          (map rank)
          set
